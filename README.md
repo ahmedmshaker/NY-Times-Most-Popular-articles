@@ -1,7 +1,7 @@
 # NY-Times-Most-Popular
 
     
-  [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4afe70ebc10a47bf99e9cf9390cb2610)](https://www.codacy.com/app/setcontentviews/NY-Times-Most-Popular?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=setcontentviews/NY-Times-Most-Popular&amp;utm_campaign=Badge_Grade)
+  [![Codacy Badge](https://api.codacy.com/project/badge/Grade/761fb62bf57d473da0f55c2f8bf81c97)](https://www.codacy.com/app/setcontentviews/NY-Times-Most-Popular-articles?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=setcontentviews/NY-Times-Most-Popular-articles&amp;utm_campaign=Badge_Grade)
 
 
 
