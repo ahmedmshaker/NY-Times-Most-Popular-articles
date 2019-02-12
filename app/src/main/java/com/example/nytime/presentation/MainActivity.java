@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.test.espresso.IdlingRegistry;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 
 import com.example.nytime.R;
 import com.example.nytime.common.EspressoIdlingResource;
@@ -21,10 +20,10 @@ public class MainActivity extends DaggerAppCompatActivity {
     private static final String CURRENT_FRAGMENT_TAG = "current_fragment";
 
     @Inject
-    ArticlesFragment articlesFragment;
+    public ArticlesFragment articlesFragment;
 
     @Inject
-    CompositeDisposable compositeDisposable;
+    public CompositeDisposable compositeDisposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +39,11 @@ public class MainActivity extends DaggerAppCompatActivity {
     }
 
 
-    void initView() {
+    private void initView() {
         replaceCurrentFragment(articlesFragment , false);
     }
 
-    void handleOnConfigurationChanged() {
+    private void handleOnConfigurationChanged() {
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(CURRENT_FRAGMENT_TAG);
         replaceCurrentFragment(fragment , false);
     }
@@ -55,7 +54,7 @@ public class MainActivity extends DaggerAppCompatActivity {
         replaceCurrentFragment(fragment , true);
     }
 
-    public void replaceCurrentFragment(Fragment fragment, boolean addToBackStack) {
+    private void replaceCurrentFragment(Fragment fragment, boolean addToBackStack) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.container, fragment, CURRENT_FRAGMENT_TAG);
         if (addToBackStack)

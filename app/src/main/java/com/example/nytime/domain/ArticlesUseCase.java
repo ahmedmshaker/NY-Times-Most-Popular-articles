@@ -23,8 +23,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ArticlesUseCase {
 
-    ArticlesService articlesService;
-    CompositeDisposable compositeDisposable;
+    private ArticlesService articlesService;
+    private CompositeDisposable compositeDisposable;
 
     @Inject
     public ArticlesUseCase(ArticlesService articlesService , CompositeDisposable compositeDisposable) {

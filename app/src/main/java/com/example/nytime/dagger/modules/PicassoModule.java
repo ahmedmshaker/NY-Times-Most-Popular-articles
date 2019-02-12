@@ -31,10 +31,6 @@ public class PicassoModule {
     public OkHttp3Downloader okHttp3Downloader(OkHttpClient okHttpClient) {
         return new OkHttp3Downloader(okHttpClient);
     }
-//    @Provides
-//    @Singleton
-//    Application provideApplication(Application application) {
-//        return application;
-//    }
+
 
 }

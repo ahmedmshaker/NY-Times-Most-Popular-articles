@@ -47,7 +47,7 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    public CompositeDisposable provideCompositeDisposable(){
+    public CompositeDisposable provideCompositeDisposable() {
         return new CompositeDisposable();
     }
 
@@ -89,7 +89,7 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    Gson provideGson() {
+    public Gson provideGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
         return gsonBuilder.create();
@@ -97,7 +97,7 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient, RxJava2CallAdapterFactory rxJava2CallAdapterFactory) {
+    public Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient, RxJava2CallAdapterFactory rxJava2CallAdapterFactory) {
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(rxJava2CallAdapterFactory)
@@ -109,7 +109,7 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    RxJava2CallAdapterFactory provideRxJava2CallAdapterFactory() {
+    public RxJava2CallAdapterFactory provideRxJava2CallAdapterFactory() {
         return RxJava2CallAdapterFactory.create();
     }
 }

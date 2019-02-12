@@ -71,7 +71,7 @@ public class ArticlesFragment extends Fragment implements ItemClickListener<Arti
         mViewModel = ViewModelProviders.of(getActivity() , viewModelFactory).get(ArticlesViewModel.class);
     }
 
-    void initViews() {
+    private void initViews() {
         adapter.setItemClickListenr(this);
         articlesRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         articlesRecyclerView.setAdapter(adapter);

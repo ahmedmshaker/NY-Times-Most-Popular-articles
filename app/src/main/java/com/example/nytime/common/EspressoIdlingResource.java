@@ -3,8 +3,7 @@ package com.example.nytime.common;
 import android.support.test.espresso.IdlingResource;
 
 public class EspressoIdlingResource {
-    static SimpleCountingIdlingResource countingIdlingResource = new SimpleCountingIdlingResource();
-    private static String RESOURCE = "GLOBAL";
+    public static SimpleCountingIdlingResource countingIdlingResource = new SimpleCountingIdlingResource();
 
     public static void increment() {
         if (countingIdlingResource != null)

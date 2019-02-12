@@ -22,8 +22,8 @@ import butterknife.ButterKnife;
 
 public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ArticlesViewHolder> {
 
-    List<Article> articles = new ArrayList<>();
-    ItemClickListener<Article> itemClickListener;
+    private List<Article> articles = new ArrayList<>();
+    private ItemClickListener<Article> itemClickListener;
 
     @Inject
     public ArticlesAdapter() {
@@ -62,17 +62,17 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Articl
 
     class ArticlesViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.title)
-        TextView tvTitle;
+        public TextView tvTitle;
         @BindView(R.id.image)
-        SimpleDraweeView image;
+        public SimpleDraweeView image;
 
         @BindView(R.id.created_by)
-        TextView tvCreatedBy;
+        public TextView tvCreatedBy;
         @BindView(R.id.source)
-        TextView tvSource;
+        public TextView tvSource;
 
         @BindView(R.id.date)
-        TextView tvDate;
+        public TextView tvDate;
 
         public ArticlesViewHolder(final View itemView) {
             super(itemView);

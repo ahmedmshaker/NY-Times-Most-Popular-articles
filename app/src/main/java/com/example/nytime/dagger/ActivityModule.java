@@ -11,7 +11,7 @@ import dagger.Provides;
 public class ActivityModule {
     @Provides
     @PerActivity
-    ArticlesFragment provideArticleFragment() {
+    public ArticlesFragment provideArticleFragment() {
         return new ArticlesFragment();
     }
 }

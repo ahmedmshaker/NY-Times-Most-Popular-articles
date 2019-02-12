@@ -13,7 +13,7 @@ public class ApiModule {
 
     @Provides
     @PerActivity
-    ArticlesService getService(Retrofit retrofit) {
+    public ArticlesService getService(Retrofit retrofit) {
         return retrofit.create(ArticlesService.class);
     }
 
