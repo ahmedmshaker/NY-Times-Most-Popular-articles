@@ -22,23 +22,19 @@ public class ArticlesDetailsFragment extends Fragment {
 
 
     @BindView(R.id.image)
-    SimpleDraweeView image;
+    public SimpleDraweeView image;
     @BindView(R.id.title)
-    TextView title;
+    public TextView title;
     @BindView(R.id.description)
-    TextView description;
+    public TextView description;
     @BindView(R.id.created_by)
-    TextView createdBy;
+    public TextView createdBy;
     @BindView(R.id.source)
-    TextView source;
+    public TextView source;
     @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    public Toolbar toolbar;
     private Article article;
 
-
-    public ArticlesDetailsFragment() {
-        // Required empty public constructor
-    }
 
 
     @Override

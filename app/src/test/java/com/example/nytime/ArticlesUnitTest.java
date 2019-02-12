@@ -8,13 +8,11 @@ import com.example.nytime.data.services.ArticlesService;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.inject.Inject;
 
 import io.reactivex.functions.Predicate;
 import io.reactivex.observers.TestObserver;
 import retrofit2.Retrofit;
 
-import static org.junit.Assert.*;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -23,11 +21,11 @@ import static org.junit.Assert.*;
  */
 public class ArticlesUnitTest {
 
-    private ArticlesService articlesService;
-    TestObserver testObserver = new TestObserver<ArticlesResponse>();
-    private Retrofit retrofit;
+    public ArticlesService articlesService;
+    public TestObserver testObserver = new TestObserver<ArticlesResponse>();
+    public Retrofit retrofit;
 
-    TestUtils testUtils;
+    public TestUtils testUtils;
 
     @Before
    public void before() {

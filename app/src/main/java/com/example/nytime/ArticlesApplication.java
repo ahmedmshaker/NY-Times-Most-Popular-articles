@@ -21,10 +21,10 @@ public class ArticlesApplication extends Application implements HasActivityInjec
 
 
     @Inject
-    DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
+    public DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
 
     @Inject
-    DispatchingAndroidInjector<Fragment> fragmentInjector;
+    public DispatchingAndroidInjector<Fragment> fragmentInjector;
 
     @Override
     public void onCreate() {

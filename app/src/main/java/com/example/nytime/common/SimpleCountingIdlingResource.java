@@ -35,7 +35,7 @@ public class SimpleCountingIdlingResource implements IdlingResource {
     /**
      * Increments the count of in-flight transactions to the resource being monitored.
      */
-    void increment() {
+    public void increment() {
         counter.getAndIncrement();
     }
 
@@ -45,7 +45,7 @@ public class SimpleCountingIdlingResource implements IdlingResource {
      *
      * @throws IllegalStateException if the counter is below 0.
      */
-    void decrement() {
+    public void decrement() {
         int counterVal = counter.decrementAndGet();
         if (counterVal == 0) {
             // we've gone from non-zero to zero. That means we're idle now! Tell espresso.

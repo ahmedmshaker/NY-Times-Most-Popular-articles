@@ -7,14 +7,14 @@ import java.util.List;
 public class ArticlesResponse {
 
     @SerializedName("num_results")
-    int numResults;
+    public int numResults;
     @SerializedName("status")
-    String status;
+    public String status;
     @SerializedName("copyright")
-    String copyright;
+    public String copyright;
 
     @SerializedName("results")
-    List<Article> articles;
+    public List<Article> articles;
 
     public int getNumResults() {
         return numResults;

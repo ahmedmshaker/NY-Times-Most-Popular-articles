@@ -35,21 +35,18 @@ public class ArticlesFragment extends Fragment implements ItemClickListener<Arti
 
     private ArticlesViewModel mViewModel;
     @BindView(R.id.articles_recycler)
-    RecyclerView articlesRecyclerView;
+    public RecyclerView articlesRecyclerView;
 
     @Inject
-    ArticlesAdapter adapter;
+    public ArticlesAdapter adapter;
 
     @Inject
-    ViewModelFactory viewModelFactory;
+    public ViewModelFactory viewModelFactory;
 
     @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    public Toolbar toolbar;
 
 
-    public static ArticlesFragment newInstance() {
-        return new ArticlesFragment();
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,7 +87,7 @@ public class ArticlesFragment extends Fragment implements ItemClickListener<Arti
         loadData();
     }
 
-    void loadData() {
+    private void loadData() {
         mViewModel.loadArticles().observe(this, new Observer<List<Article>>() {
 
             @Override
