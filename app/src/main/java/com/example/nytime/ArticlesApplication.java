@@ -15,8 +15,6 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
-//import com.example.nytime.dagger.component.DaggerAppComponent;
-
 public class ArticlesApplication extends Application implements HasActivityInjector, HasSupportFragmentInjector {
 
 
@@ -32,7 +30,7 @@ public class ArticlesApplication extends Application implements HasActivityInjec
 
         DaggerAppComponent.builder()
                 .application(this)
-                .networkModule(Constants.URL)
+                .url(Constants.URL)
                 .build()
                 .inject(this);
 

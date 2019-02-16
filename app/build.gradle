@@ -35,6 +35,10 @@ android {
             it.buildConfigField 'String', 'API_KEY', "\"FqKkAvkmwygbm6LtlQXRwSccIHDkiatW\""
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {

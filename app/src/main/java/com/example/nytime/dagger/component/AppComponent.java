@@ -30,7 +30,7 @@ public interface AppComponent {
         Builder application(Application application);
 
         @BindsInstance
-        Builder networkModule(@Named("url") String url);
+        Builder url(@Named("url") String url);
 
 
         AppComponent build();

@@ -5,6 +5,9 @@ package com.example.nytime.dagger.modules;
  */
 
 import android.app.Application;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.example.nytime.common.Constants;
 import com.google.gson.FieldNamingPolicy;
@@ -13,14 +16,19 @@ import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.io.File;
+import java.io.IOException;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
 import okhttp3.Cache;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -37,12 +45,6 @@ public class NetworkModule {
 //    @Named("url") // replaced by @Inject
 //    String mBaseUrl;
 //
-//    @Provides
-//    @Named("url")
-//    @Singleton
-//    public String provideUrl(){
-//        return mBaseUrl;
-//    }
 
 
     @Provides
@@ -55,14 +57,43 @@ public class NetworkModule {
     @Provides
     @Singleton
     public HttpLoggingInterceptor loggingInterceptor() {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                Timber.i(message);
-            }
-        });
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(message -> Timber.i(message));
         interceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
         return interceptor;
+    }
+
+    @Provides
+    @Singleton
+    public Interceptor provideNetworkIntercepter(@Named("hasNetwork") boolean hasNetwork) {
+        return chain -> {
+            Request request = chain.request();
+
+
+            if (hasNetwork)
+                /*
+                 *  If there is Internet, get the cache that was stored 5 seconds ago.
+                 *  If the cache is older than 5 seconds, then discard it,
+                 *  and indicate an error in fetching the response.
+                 *  The 'max-age' attribute is responsible for this behavior.
+                 */
+                request.newBuilder().header("Cache-Control", "public, max-age=" + 5).build();
+            else
+                request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build();
+            return chain.proceed(request);
+        };
+    }
+
+
+    @Provides
+    @Singleton
+    @Named("hasNetwork")
+    public boolean hasNetwork(Context context) {
+        boolean isConnected = false;// Initial Value
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+        if (activeNetwork != null && activeNetwork.isConnected())
+            isConnected = true;
+        return isConnected;
     }
 
     @Provides
@@ -80,9 +111,10 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    public OkHttpClient okHttpClient(HttpLoggingInterceptor loggingInterceptor, Cache cache) {
+    public OkHttpClient okHttpClient(HttpLoggingInterceptor loggingInterceptor, Cache cache, Interceptor interceptor) {
         return new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
+                .addInterceptor(interceptor)
                 .cache(cache)
                 .build();
     }
@@ -97,11 +129,11 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    public Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient, RxJava2CallAdapterFactory rxJava2CallAdapterFactory) {
+    public Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient, RxJava2CallAdapterFactory rxJava2CallAdapterFactory, @Named("url") String url) {
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(rxJava2CallAdapterFactory)
-                .baseUrl(Constants.URL)
+                .baseUrl(url)
                 .client(okHttpClient)
                 .build();
         return retrofit;
